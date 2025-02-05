@@ -76,7 +76,7 @@ export default function About() {
         </div>
         <div className="md:w-1/2 p-6 flex justify-center">
           <Image 
-            src="/images/IMG_0325.jpg" 
+            src="/images/img_0325.jpg" 
             alt="Company team working" 
             width={500} 
             height={300} 
