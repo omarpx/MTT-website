@@ -75,14 +75,16 @@ export default function About() {
           </p>
         </div>
         <div className="md:w-1/2 p-6 flex justify-center">
-        <Image 
-          src="/images/IMG_0325.jpg" 
-          alt="Company team working" 
-          width={500} 
-          height={300} 
-          className="rounded-lg shadow-lg max-w-full h-auto object-cover"
-        />
-      </div>
+  <Image 
+    src="/images/IMG_0325.jpg" 
+    alt="Company team working" 
+    width={500} 
+    height={300} 
+    layout="intrinsic"
+    className="rounded-lg shadow-lg w-full h-auto object-cover"
+  />
+</div>
+
 
       </motion.div>
 
