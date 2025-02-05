@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Montserrat, Raleway, Manrope } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer"; // ✅ Footer added back
+import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/context/LanguageContext";
 
-// Load multiple Google Fonts
+// Load fonts
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const poppins = Poppins({ subsets: ["latin"], variable: "--font-poppins", weight: ["400", "600", "700"] });
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat", weight: ["400", "700"] });
@@ -13,8 +13,11 @@ const raleway = Raleway({ subsets: ["latin"], variable: "--font-raleway", weight
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "MTT Vuokraus & Kuivaus",
+  title: "MTT Kuivaus & Vuokraus",
   description: "Your trusted rental and drying service",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -27,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LanguageProvider>
           <Navbar />
           <main className="flex-grow">{children}</main>
-          <Footer /> {/* ✅ Footer added back */}
+          <Footer />
         </LanguageProvider>
       </body>
     </html>

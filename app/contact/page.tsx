@@ -3,13 +3,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
-import Link from "next/link";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 
 export default function Contact() {
   const { language } = useLanguage();
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const translations = {
     fi: {
