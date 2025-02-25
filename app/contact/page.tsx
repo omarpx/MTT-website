@@ -8,7 +8,7 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 export default function Contact() {
   const { language } = useLanguage();
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const translations = {
     fi: {
@@ -74,7 +74,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="relative flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-[#1E1E2E] via-[#3A1C71] to-[#FF6B6B] text-white px-6 pt-24 pb-16 w-full">
+    <section className="relative flex flex-col md:flex-row items-center justify-center min-h-screen bg-[var(--background)] text-[var(--foreground)] px-6 pt-24 pb-16 w-full">
       
       {/* Left Side: Contact Info & Form */}
       <motion.div 
@@ -84,46 +84,82 @@ export default function Contact() {
         className="w-full md:w-1/2 space-y-6"
       >
         {/* Header */}
-        <div className="bg-[#ffffff0d] p-6 rounded-xl shadow-lg border border-white/20 text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A78BFA] drop-shadow-md">
+        <div className="bg-[var(--card-bg)] p-6 rounded-xl shadow-xl border border-[var(--border-color)] text-center">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-800">
             {translations[language].title}
           </h1>
-          <p className="mt-3 text-lg sm:text-xl text-gray-300 font-light">
+          <p className="mt-3 text-lg sm:text-xl text-gray-600 font-light">
             {translations[language].subtitle}
           </p>
         </div>
 
         {/* Contact Info */}
-        <div className="bg-[#ffffff0d] p-6 rounded-xl shadow-lg border border-white/20 space-y-4">
+        <div className="bg-[var(--card-bg)] p-6 rounded-xl shadow-md border border-[var(--border-color)] space-y-4">
           <div className="flex items-center gap-4">
-            <MapPin size={24} className="text-[#FF6B6B]" />
-            <p className="text-lg text-gray-300">
+            <MapPin size={24} className="text-gray-600" />
+            <p className="text-lg text-gray-700">
               <strong>{translations[language].location}:</strong> Inspehtorinkatu 3, 20540, Turku, Finland
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <Phone size={24} className="text-[#FF6B6B]" />
-            <p className="text-lg text-gray-300">
+            <Phone size={24} className="text-gray-600" />
+            <p className="text-lg text-gray-700">
               <strong>{translations[language].phone}:</strong> 0401866144
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <Mail size={24} className="text-[#FF6B6B]" />
-            <p className="text-lg text-gray-300">
+            <Mail size={24} className="text-gray-600" />
+            <p className="text-lg text-gray-700">
               <strong>{translations[language].email}:</strong> omar.polo458@gmail.com
             </p>
           </div>
         </div>
 
         {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="space-y-4 bg-[#ffffff0d] p-6 rounded-xl shadow-lg border border-white/20">
-          <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder={translations[language].form.name} required className="w-full p-3 bg-[#2E1A47] text-white border rounded-md" />
-          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={translations[language].form.email} required className="w-full p-3 bg-[#2E1A47] text-white border rounded-md" />
-          <textarea name="message" value={formData.message} onChange={handleChange} placeholder={translations[language].form.message} rows={3} required className="w-full p-3 bg-[#2E1A47] text-white border rounded-md" />
-          <button type="submit" className="w-full flex items-center justify-center gap-2 px-6 py-3 text-lg font-bold bg-gradient-to-r from-[#FF6B6B] to-[#A78BFA] rounded-xl">
+        <form onSubmit={handleSubmit} className="space-y-4 bg-[var(--card-bg)] p-6 rounded-xl shadow-xl border border-[var(--border-color)]">
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder={translations[language].form.name}
+            required
+            className="w-full p-3 bg-white text-gray-800 border border-gray-300 rounded-md"
+          />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder={translations[language].form.email}
+            required
+            className="w-full p-3 bg-white text-gray-800 border border-gray-300 rounded-md"
+          />
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder={translations[language].form.message}
+            rows={3}
+            required
+            className="w-full p-3 bg-white text-gray-800 border border-gray-300 rounded-md"
+          />
+          
+          <button
+            type="submit"
+            className="w-full flex items-center justify-center gap-2 px-6 py-3 text-lg font-bold bg-gray-800 text-white rounded-xl hover:bg-gray-700 transition-all"
+          >
             <Send size={20} />
             {translations[language].form.send}
           </button>
+
+          {/* Success/Error Message */}
+          {status === "error" && (
+            <p className="text-red-500 text-sm mt-2">{translations[language].form.error}</p>
+          )}
+          {status === "success" && (
+            <p className="text-green-500 text-sm mt-2">{translations[language].form.success}</p>
+          )}
         </form>
       </motion.div>
 
@@ -134,7 +170,7 @@ export default function Contact() {
         transition={{ duration: 0.8 }}
         className="w-full md:w-1/2 mt-6 md:mt-0 flex flex-col items-center md:ml-8"
       >
-        <h2 className="text-2xl font-bold text-[#A78BFA] text-center mb-4">{translations[language].findUs}</h2>
+        <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">{translations[language].findUs}</h2>
         <iframe 
           src="https://www.google.com/maps?q=Inspehtorinkatu+3,+20540+Turku,+Finland&output=embed" 
           width="100%" 

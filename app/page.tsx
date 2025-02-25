@@ -1,8 +1,8 @@
 "use client";
 
-import { useLanguage } from "@/context/LanguageContext"; 
+import { useLanguage } from "@/context/LanguageContext";
 import Link from "next/link";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 
 export default function Home() {
   const { language } = useLanguage();
@@ -43,44 +43,48 @@ export default function Home() {
   };
 
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-[#1E1E2E] via-[#3A1C71] to-[#FF6B6B] text-white text-center px-6 pb-16 pt-24 overflow-hidden overscroll-contain">
+    <section className="relative flex flex-col items-center justify-center min-h-screen bg-[var(--background)] text-[var(--foreground)] text-center px-6 pb-16 pt-24 overflow-hidden">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative z-10 max-w-3xl bg-[#ffffff0d] backdrop-blur-md p-10 rounded-xl shadow-lg border border-white/20"
+        className="relative z-10 max-w-3xl bg-[var(--card-bg)] backdrop-blur-md p-10 rounded-xl shadow-xl border border-[var(--border-color)]"
       >
-        <h1 className="text-5xl sm:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A78BFA] drop-shadow-md">
+        <h1 className="text-5xl sm:text-7xl font-extrabold text-gray-800">
           {translations[language].title}
         </h1>
-        <p className="mt-6 text-lg sm:text-xl text-gray-300 font-light tracking-wide">{translations[language].subtitle}</p>
-        <p className="mt-4 text-base sm:text-lg text-gray-400 font-medium italic">{translations[language].description}</p>
+        <p className="mt-6 text-lg sm:text-xl text-gray-600 font-light">
+          {translations[language].subtitle}
+        </p>
+        <p className="mt-4 text-base sm:text-lg text-gray-500 italic">
+          {translations[language].description}
+        </p>
       </motion.div>
 
       {/* Animated Featured Services Section */}
       <div className="mt-20 max-w-4xl text-center px-6">
-        <h2 className="text-4xl font-semibold text-[#FF6B6B] drop-shadow-lg animate-pulse">{translations[language].featuredServices}</h2>
+        <h2 className="text-4xl font-semibold text-gray-700">{translations[language].featuredServices}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mt-8">
-          {['Fast Delivery', 'Premium Quality', '24/7 Support'].map((service, index) => (
+          {['Nopea toimitus', 'Laadukkaat laitteet', '24/7 Tuki'].map((service, index) => (
             <motion.div key={index} 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-[#ffffff0d] p-10 rounded-xl shadow-xl border border-white/10 hover:scale-105 transition-transform"
+              className="bg-white p-10 rounded-xl shadow-md border border-gray-300 hover:scale-105 transition-transform"
             >
-              <h3 className="text-xl font-bold text-[#A78BFA]">{service}</h3>
-              <p className="mt-4 text-gray-300">Experience excellence with our {service.toLowerCase()} services.</p>
+              <h3 className="text-xl font-bold text-gray-800">{service}</h3>
+              <p className="mt-4 text-gray-600">Koe erinomainen palvelu {service.toLowerCase()}-ratkaisuillamme.</p>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Call to Action with Hover Effects */}
+      {/* Call to Action */}
       <div className="mt-24 max-w-3xl text-center px-6">
-        <h2 className="text-4xl font-bold text-[#FF6B6B] drop-shadow-lg">{translations[language].callToAction}</h2>
+        <h2 className="text-4xl font-bold text-gray-800">{translations[language].callToAction}</h2>
         <Link 
           href="/contact"
-          className="mt-8 inline-block px-10 py-5 text-lg font-bold bg-gradient-to-r from-[#FF6B6B] to-[#A78BFA] hover:from-[#E04A4A] hover:to-[#9066D0] transition-all rounded-xl shadow-lg transform hover:-translate-y-1"
+          className="mt-8 inline-block px-10 py-5 text-lg font-bold bg-white text-gray-800 border border-gray-300 hover:bg-gray-200 transition-all rounded-xl shadow-md"
         >
           {translations[language].quoteBtn}
         </Link>
